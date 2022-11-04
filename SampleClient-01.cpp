@@ -31,13 +31,11 @@ Usage [optional]:
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#include <string.h>
 
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <string>
 ////////////////////////////////////////////////////////////////////////
 #include <inttypes.h>
 #include <stdio.h>
@@ -68,7 +66,6 @@ void drawText(char*, float, float);
 void display();
 
 float *px, *py, *pz;
-int coor_accuracy = 6;
 int move = 0;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void glut_main(int, char**);
@@ -823,33 +820,23 @@ void display() {
     // glColor3f(0.9, 0.9, 0.1);
     // glutSolidSphere(0.5, 32, 32);
 
-    std::string tempX = "X = " + std::to_string(*px * 1000);
-    const char* c1 = tempX.c_str();
-    char* c1x = strdup(c1);
-    drawText(c1x, 0., 0.4);
+    char cX[300];
+    gcvt(*px, 3, cX);
 
-    std::string tempY = "Y = " + std::to_string(*py * 1000);
-    const char* c2 = tempY.c_str();
-    char* c2y = strdup(c2);
-    drawText(c2y, 0., 0.2);
+    char cY[300];
+    gcvt(*py, 3, cY);
 
-    std::string tempZ = "Z = " + std::to_string(*pz * 1000);
-    const char* c3 = tempZ.c_str();
-    char* c3z = strdup(c3);
-    drawText(c3z, 0., 0.0);
+    char cZ[300];
+    gcvt(*pz, 3, cZ);
 
-    // char cX[300];
-    // gcvt(*px * 1000, coor_accuracy, cX);
+    // float num11 = 1.001f;
+    // char ff[100];
+    // gcvt(num11, 6, ff);
+    // char tt[] = "Hi Mehdi";
 
-    // char cY[300];
-    // gcvt(*py * 1000, coor_accuracy, cY);
-
-    // char cZ[300];
-    // gcvt(*pz * 1000, coor_accuracy, cZ);
-
-    // drawText(cX, 0., 0.4);
-    // drawText(cY, 0., 0.2);
-    // drawText(cZ, 0., 0.0);
+    drawText(cX, 0.0, 0.0);
+    drawText(cY, 0., 0.2);
+    drawText(cZ, 0., 0.4);
 
     glFlush();
 }
